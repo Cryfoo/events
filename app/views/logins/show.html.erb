@@ -1,0 +1,40 @@
+<div>
+	<h1 id="header">Edit Your Profile</h1>
+	<a href="/events" class="link">Events Dashboard</a>
+	<a href="/logout">Logout</a>
+</div>
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+		<p class="event_error"><%= error %></p>
+	<% end %>
+<% end %>
+<form action="/user/<%= @user.id %>" method="post" id="update_form">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="hidden" name="_method" value="patch">
+	<div>
+		<label for="first_name">First Name:</label>
+		<input id="first_name" type="text" name="user[first_name]" value="<%= @user.first_name %>">
+	</div>
+	<div>
+		<label for="last_name">Last Name:</label>
+		<input id="last_name" type="text" name="user[last_name]" value="<%= @user.last_name %>">
+	</div>
+	<div>
+		<label for="email">Email:</label>
+		<input id="email" type="text" name="user[email]" value="<%= @user.email %>">
+	</div>
+	<div>
+		<label for="location">Location:</label>
+		<input id="location" type="text" name="user[location]" id="location" value="<%= @user.location %>">
+		<select name="user[state]">
+			<% @states.each do |state| %>
+				<% if state == @user.state %>
+					<option selected value="<%= state %>"><%= state %></option>
+				<% else %>
+					<option><%= state %></option>
+				<% end %>
+			<% end %>
+		</select>
+	</div>
+	<input type="submit" value="Update Records" id="update_button">
+</form>

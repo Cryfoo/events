@@ -1,0 +1,100 @@
+<h1 class="header">Welcome <%= @user.first_name %>!</h1>
+<a href="/user/<%= @user.id %>" class="link">Edit My Profile</a>
+<a href="/logout">Logout</a>
+<p>Here are some of the events of your state:</p>
+<table id="same_state_table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Location</th>
+			<th>Host</th>
+			<th>Action/Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if @same_state_events %>
+			<% @same_state_events.each do |event| %>
+				<tr>
+					<th><a href="/events/<%= event.id %>"><%= event.name %></a></th>
+					<th><%= event.date %></th>
+					<th><%= event.location %></th>
+					<th><%= event.user.first_name %></th>
+					<% if event.user == @user %>
+						<th>
+							<a href="/events/edit/<%= event.id %>" class="edit">Edit</a>
+							<a href="/events/<%= event.id %>" data-method="delete">Delete</a>
+						</th>
+					<% elsif !event.joined_users.include?(@user) %>
+						<th><a href="/joins/<%= event.id %>" data-method="post">Join</a></th>
+					<% else %>
+						<th>Joining <a href="/joins/<%= event.find_join_id(@user) %>" data-method="delete" class="cancel">Cancel</a></th>
+					<% end %>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
+<p>Here are some of the events on other states:</p>
+<table id="other_state_table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Location</th>
+			<th>State</th>
+			<th>Host</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if @other_state_events %>
+			<% @other_state_events.each do |event| %>
+				<tr>
+					<th><a href="/events/<%= event.id %>"><%= event.name %></a></th>
+					<th><%= event.date %></th>
+					<th><%= event.location %></th>
+					<th><%= event.state %></th>
+					<th><%= event.user.first_name %></th>
+					<% if event.user == @user %>
+						<th>
+							<a href="/events/edit/<%= event.id %>" class="edit">Edit</a>
+							<a href="/events/<%= event.id %>" data-method="delete">Delete</a>
+						</th>
+					<% elsif !event.joined_users.include?(@user) %>
+						<th><a href="/joins/<%= event.id %>" data-method="post">Join</a></th>
+					<% else %>
+						<th>Joining <a href="/joins/<%= event.find_join_id(@user) %>" data-method="delete" class="cancel">Cancel</a></th>
+					<% end %>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
+<h3>Add Event</h3>
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+		<p class="user_error"><%= error %></p>
+	<% end %>
+<% end %>
+<form action="/events" method="post" id="event_form">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<div>
+		<label for="name">Name:</label>
+		<input id="name" type="text" name="event[name]">
+	</div>
+	<div>
+		<label for="date">Date:</label>
+		<input id="date" type="date" name="event[date]">
+	</div>
+	<div>
+		<label for="location">Location:</label>
+		<input id="location" type="text" name="event[location]" id="location">
+		<select name="event[state]">
+			<% @states.each do |state| %>
+				<option value="<%= state %>"><%= state %></option>
+			<% end %>
+		</select>
+	</div>
+	<input type="submit" value="Add Event" id="event_button">
+</form>

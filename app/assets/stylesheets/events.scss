@@ -1,0 +1,121 @@
+// Place all the styles related to the Events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.header {
+	width: 300px;
+	display: inline-block;
+}
+
+.link {
+	margin: 0px 20px 0px 400px;
+}
+
+#same_state_table {
+	width: 700px;
+	outline: 1px solid black;
+}
+
+#other_state_table {
+	width: 800px;
+	outline: 1px solid black;
+}
+
+#joined_users_table {
+	width: 400px;
+	outline: 1px solid black;
+}
+
+#same_state_table thead, #other_state_table thead, #joined_users_table thead {
+	outline: 1px solid black;
+	background-color: lightgrey;
+}
+
+#same_state_table th, #other_state_table th, #joined_users_table th {
+	padding: 10px;
+}
+
+#event_form label, #evt_upd_form label{
+	display: inline-block;
+	width: 100px;
+	margin-bottom: 10px;
+}
+
+#date {
+	width: 156px;
+}
+
+#event_form select, #evt_upd_form select {
+	margin-left: 5px;
+}
+
+#event_button {
+	margin: 5px 0px 0px 187px;
+}
+
+.event_error {
+	width: 200px;
+	margin: 5px 0px;
+	outline: 1px solid black;
+	padding: 5px;
+	background-color: red;
+	color: white;
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+}
+
+#event_block, #comment_outer_block {
+	display: inline-block;
+	vertical-align: top;
+}
+
+#event_block {
+	margin: 0px 40px 0px 20px;
+}
+
+#comment_outer_block {
+	padding-top: 30px;
+}
+
+#comment_inner_block {
+	width: 400px;
+	height: 200px;
+	padding: 8px 5px 0px 8px;
+	outline: 1px solid black;
+}
+
+.comment {
+	margin: 5px 0px 5px 0px;
+}
+
+.edit {
+	margin-right: 10px;
+}
+
+#evt_upd_btn {
+	margin-left: 206px;
+}
+
+#host {
+	margin-left: 65px;
+}
+
+.cancel {
+	margin-left: 10px;
+}
+
+#comment_form label {
+	display: block;
+	margin: 20px 0px 10px 0px;
+}
+
+textarea {
+	display: block;
+	width: 409px;
+	height: 50px;
+}
+
+#cmt_button {
+	margin: 10px 0px 0px 289px;
+}

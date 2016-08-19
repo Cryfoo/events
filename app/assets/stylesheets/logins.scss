@@ -1,0 +1,66 @@
+// Place all the styles related to the Logins controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	margin-left: 20px;
+}
+
+#register_block, #login_block {
+	width: 300px;
+	padding: 20px 0px 20px 20px;
+	outline: 1px solid black;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#register_block h3, #login_block h3 {
+	margin-top: 10px;
+}
+
+#register_block label, #login_block label, #update_form label {
+	display: inline-block;
+	width: 100px;
+	margin-bottom: 10px;
+}
+
+#location {
+	width: 103px;
+}
+
+#register_block {
+	margin-right: 10px;
+}
+
+#register_block select, #update_form select {
+	margin-left: 5px;
+}
+
+#regi_button {
+	margin: 5px 0px 0px 199px;
+}
+
+#login_button {
+	margin: 5px 0px 0px 216px;
+}
+
+#update_button {
+	margin: 5px 0px 0px 152px;
+}
+
+.user_error {
+	width: 200px;
+	margin: 5px 0px;
+	outline: 1px solid black;
+	padding: 5px;
+	background-color: red;
+	color: white;
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+}
+
+#header {
+	width: 300px;
+	display: inline-block;
+}

@@ -1,0 +1,35 @@
+<h1 class="header">Edit Event</h1>
+<a href="/events" class="link">Events Dashboard</a>
+<a href="/logout">Logout</a>
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+		<p class="event_error"><%= error %></p>
+	<% end %>
+<% end %>
+<form action="/events/edit/<%= @event.id %>" method="post" id="evt_upd_form">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="hidden" name="_method" value="patch">
+	<p>Host: <span id="host"><%= @event.user.first_name %> <%= @event.user.last_name %></span></p>
+	<div>
+		<label for="name">Name:</label>
+		<input id="name" type="text" name="event[name]" value="<%= @event.name %>">
+	</div>
+	<div>
+		<label for="date">Date:</label>
+		<input id="date" type="date" name="event[date]" value="<%= @event.date %>">
+	</div>
+	<div>
+		<label for="location">Location:</label>
+		<input id="location" type="text" name="event[location]" id="location" value="<%= @event.location %>">
+		<select name="event[state]">
+			<% @states.each do |state| %>
+				<% if state == @event.state %>
+					<option selected value="<%= state %>"><%= state %></option>
+				<% else %>
+					<option><%= state %></option>
+				<% end %>
+			<% end %>
+		</select>
+	</div>
+	<input type="submit" value="Update" id="evt_upd_btn">
+</form>

@@ -1,0 +1,51 @@
+<h1 class="header"><%= @event.name %></h1>
+<a href="/events" class="link">Events Dashboard</a>
+<a href="/logout">Logout</a>
+<div id="event_block">
+	<p>Host: <%= @event.user.first_name %> <%= @event.user.last_name %></p>
+	<p>Date: <%= @event.date.strftime("%B %d, %Y") %></p>
+	<p>Location: <%= @event.location %>, <%= @event.state %></p>
+	<p>People who are joining the event: <%= @event.joined_users.count %></p>
+	<table id="joined_users_table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Location</th>
+				<th>State</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @event.joined_users %>
+				<% @event.joined_users.each do |user| %>
+					<tr>
+						<th><%= user.first_name %> <%= user.last_name %></th>
+						<th><%= user.location %></th>
+						<th><%= user.state %></th>
+					</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div id="comment_outer_block">
+	<p>Discussion about this event:</p>
+	<div id="comment_inner_block" style="overflow-y:scroll;">
+		<% if @event.comments %>
+			<% @event.comments.each do |comment| %>
+				<p class="comment"><%= comment.user.first_name %> says: <%= comment.content %></p>
+				<p class="comment">----------------------------------------------------------------------</p>
+			<% end %>
+		<% end %>
+	</div>
+	<form action="/comments/<%= @event.id %>" method="post" id="comment_form">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<label for="comment">Add Comment:</label>
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |error| %>
+				<p class="event_error"><%= error %></p>
+			<% end %>
+		<% end %>
+		<textarea id="comment" name="comment"></textarea>
+		<input type="submit" value="Submit Comments" id="cmt_button">
+	</form>
+</div>
